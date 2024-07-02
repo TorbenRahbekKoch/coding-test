@@ -23,8 +23,9 @@ import { Gender } from "./User";
 import { EyeColor } from "./User";
 import { HairColor } from "./User";
 import { User } from "./User";
-import { gridView, listView } from './UsersView';
 import { parsePageCount } from './parsePageCount';
+import { UsersGridView } from './UsersGridView';
+import { UsersListView } from './UsersListView';
 
 function buildPagination(currentPage: number, pageSize: number): string {
   return `_page=${currentPage}&_limit=${pageSize}`
@@ -115,9 +116,9 @@ export function UsersPage() {
         onChange={newPage => setcurrentPage(newPage)}></Pagination>
 
       {showingGrid
-        ? gridView(users)
-        : listView(users)}
-
+        ? <UsersGridView users={users}/>
+        : <UsersListView  users={users}/>
+      }
     </>
   );
 }

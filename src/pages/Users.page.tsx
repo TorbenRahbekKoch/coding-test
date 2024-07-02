@@ -14,18 +14,16 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-export type User = {
-  id: string;
-  name: string;
-  avatar: string;
-  gender: 'female' | 'male';
-  hair: 'black' | 'brown' | 'blonde' | 'red' | 'grey';
-  eyes: 'brown' | 'blue' | 'green';
-  glasses: boolean;
-};
+// Immer is so nice to at handling individual property changes
+// to complex objects and useImmer encapsulates useState and immer.
+// See: https://immerjs.github.io/immer/example-setstate
+import { useImmer } from "use-immer";
+
+import { User, UserFilter, defaultFilter, filterUsers } from './user-filtering';
 
 export function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
+  const [userFilter, setUserFilter] = useImmer<UserFilter>(defaultFilter)
   const [opened, { toggle }] = useDisclosure(false);
 
   useEffect(() => {
@@ -45,7 +43,11 @@ export function UsersPage() {
       <Collapse in={opened}>
         <Paper shadow="sm" p={'lg'} mb="md" withBorder bg={'gray.1'}>
           <Stack gap={10}>
-            <TextInput label="Name" placeholder="Enter user's name to filter list" />
+            <TextInput 
+              label="Name" 
+              placeholder="Enter user's name to filter list" 
+              value={userFilter?.name} 
+              onChange={e => setUserFilter(filter => { filter.name = e.target.value})} />
             <Select
               label="Hair Colour"
               placeholder="Pick value to filter list"
@@ -69,7 +71,7 @@ export function UsersPage() {
       </Collapse>
 
       <Group>
-        {users.map((user, index) => (
+        {filterUsers(users, userFilter).map((user, index) => (
           <Card radius={'md'} withBorder key={index} w={'220'}>
             <Card.Section>
               <Image src={`/uploads/${user.avatar}`} alt={`Avatar for ${user.name}`} />

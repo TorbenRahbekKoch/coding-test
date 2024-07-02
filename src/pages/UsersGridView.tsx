@@ -22,6 +22,16 @@ export function UsersGridView({users}: Props) {
                     >
                         View
                     </Button>
+                    <Button
+                        size={'xs'}
+                        fullWidth
+                        variant={'outline'}
+                        color={'grape'}
+                        component={'a'}
+                        href={`/users/edit/${user.id}`}
+                    >
+                        Edit
+                    </Button>
                 </Card>
             ))}
         </Group>)

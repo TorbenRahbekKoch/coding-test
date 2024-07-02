@@ -1,20 +1,8 @@
-import { Image, List, Paper, Stack, Text, Title } from "@mantine/core"
+import { Button, Image, List, Paper, Stack, Text, Title } from "@mantine/core"
 import { User } from "./User"
 import { UserRole } from "./UserRole"
+import { lookupRoles } from "./lookupRoles"
 
-
-function lookupRoles(user: User, roles: UserRole[]): string[] {
-    // For each role in user, look it up in roles
-    // and then remove any empty, just in case
-    return user.roles
-        .map(roleId => {
-            const role = roles.find(role => role.id == roleId)
-            return role != null
-                ? role.description
-                : ''
-        })
-        .filter(role => role != '')
-}
 
 // The UserDetailsPresenter does not care how it is rendered, since
 // it gets all the information it needs in Props.
@@ -47,6 +35,16 @@ export function UserDetailsPresenter({ user, roles }: Props) {
                 <List>
                     {lookupRoles(user, roles).map(role => <List.Item>{role}</List.Item>)}
                 </List>
+                <Button
+                    size={'xs'}
+                    fullWidth
+                    variant={'outline'}
+                    color={'grape'}
+                    component={'a'}
+                    href={`/users/edit/${user.id}`}
+                >
+                    Edit
+                </Button>
             </Stack>
         </Paper>
     )

@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react"
 import { User } from "./User"
 import { useParams } from "react-router-dom"
-import { UserDetailsPresenter } from "./UserDetails.presenter"
 import { UserRole } from "./UserRole"
+import { UserEditPresenter } from "./UserEdit.presenter"
 
-// I have split the UserDetails page into a container and
-// a presenter. The container manages communication with the
-// outside world, and is allowed to know that it is
-// rendered by a router.
-export function UserDetailsContainer() {
-    const {id} = useParams()
+export function UserEditContainer() {
+    const { id } = useParams()
+
     const [roles, setRoles] = useState<UserRole[]>([])
     const [user, setUser] = useState<User | undefined>(undefined)
 
@@ -23,7 +20,17 @@ export function UserDetailsContainer() {
         fetch(`http://localhost:3000/users/${id}`)
             .then(response => response.json())
             .then(data => setUser(data))
-    },[])
+    }, [])
+
+    async function onSave(user: User) {
+        const response = await fetch(
+            `http://localhost:3000/users/${id}`, {
+            method: "Post",
+            body: JSON.stringify(user)
+        })
+        const json = await response.json();
+        return json;
+    }
 
     // The json-server serves an empty object when we ask for non-existing
     // users instead of a 404
@@ -33,6 +40,6 @@ export function UserDetailsContainer() {
     }
 
     return (
-        <UserDetailsPresenter user={user} roles={roles}></UserDetailsPresenter>
+        <UserEditPresenter user={user} roles={roles} onSave={onSave}></UserEditPresenter>
     )
 }

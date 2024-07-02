@@ -23,7 +23,7 @@ export interface UserFilter {
     readonly hair?: HairColor
     readonly eyes?: EyeColor
     readonly gender?: Gender
-    readonly glasses: Glasses
+    readonly glasses: Glasses    
 }
 
 export const defaultFilter: UserFilter = {
@@ -78,7 +78,7 @@ export function filterUsers(users: User[], filter: UserFilter): User[] {
 // Here comes the query building for backend filtering
 function buildNameFilter(name: string) {
     return (name.length > 0)
-        ? `name=${name}`
+        ? `q=${name}`
         : ''
 }
 

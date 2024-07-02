@@ -30,3 +30,8 @@ I'll live ;)
 It is good question whether the filter should be cleared when hiding filter. I have chosen not to.
 
 Choosing between Grid or List is done via a single button, similar to filtering.
+
+Adding (proper) pagination was a hazzle since the json-server returns the page count
+in a links header, so that had to be parsed out.
+
+

@@ -14,3 +14,7 @@ Adding packages immer and use-immer - so very nice
 for handling changes to objects.
 https://immerjs.github.io/immer/example-setstate 
 
+First implemented name filter, then the rest.
+
+It could be argued that the code running on onChange should be outside the UsersPage component
+since it is not strictly presentation related.

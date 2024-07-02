@@ -28,3 +28,5 @@ And a little while later, only drawback is that one seemingly cannot search on a
 I'll live ;)
 
 It is good question whether the filter should be cleared when hiding filter. I have chosen not to.
+
+Choosing between Grid or List is done via a single button, similar to filtering.

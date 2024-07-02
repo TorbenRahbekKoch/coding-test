@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import {
   Button,
-  Card,
   Collapse,
   Group,
-  Image,
   Paper,
   Radio,
   Select,
   Stack,
   TextInput,
-  Title,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -19,15 +16,16 @@ import { useDisclosure } from '@mantine/hooks';
 // See: https://immerjs.github.io/immer/example-setstate
 import { useImmer } from "use-immer";
 
-import { EyeColor, Gender, Glasses, HairColor, User, UserFilter, buildFilter, defaultFilter, filterUsers } from './user-filtering';
+import { EyeColor, Gender, Glasses, HairColor, User, UserFilter, buildFilter, defaultFilter } from './user-filtering';
+import { gridView, listView } from './UsersView';
 
 export function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [userFilter, setUserFilter] = useImmer<UserFilter>(defaultFilter)
   const [opened, { toggle }] = useDisclosure(false);
+  const [showingGrid, toggleShowingGrid] = useDisclosure(true)
 
-  useEffect(() => {    
-    window.document.body.style.cursor ='wait'
+  useEffect(() => {
     fetch(`http://localhost:3000/users?${buildFilter(userFilter)}`)
       .then((response) => response.json())
       .then((data) => setUsers(data));
@@ -82,28 +80,16 @@ export function UsersPage() {
         </Paper>
       </Collapse>
 
-      <Group>
-        {users.map((user, index) => (
-          <Card radius={'md'} withBorder key={index} w={'220'}>
-            <Card.Section>
-              <Image src={`/uploads/${user.avatar}`} alt={`Avatar for ${user.name}`} />
-            </Card.Section>
-            <Title my={'md'} order={4}>
-              {user.name}
-            </Title>
-            <Button
-              size={'xs'}
-              fullWidth
-              variant={'outline'}
-              color={'grape'}
-              component={'a'}
-              href={`/users/view/${user.id}`}
-            >
-              View
-            </Button>
-          </Card>
-        ))}
-      </Group>
+      <div>
+        <Button my={'md'} onClick={toggleShowingGrid.toggle}>
+          {showingGrid ? 'List' : 'Grid'}
+        </Button>
+      </div>
+
+      {showingGrid
+        ? gridView(users)
+        : listView(users)}
+
     </>
   );
 }

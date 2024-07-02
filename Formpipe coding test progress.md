@@ -21,7 +21,8 @@ since it is not strictly presentation related.
 
 And then I started thinking on that backend thingy. Does it support querying and pagination?
 Let me google...
-https://www.npmjs.com/package/json-server
+https://www.npmjs.com/package/json-server and https://github.com/typicode/json-server/tree/v0 - for
+some reason I did not spot that in the readme 
 It certainly does - back to the drawing board ;)
 
 And a little while later, only drawback is that one seemingly cannot search on a part of the name.
@@ -33,5 +34,8 @@ Choosing between Grid or List is done via a single button, similar to filtering.
 
 Adding (proper) pagination was a hazzle since the json-server returns the page count
 in a links header, so that had to be parsed out.
+
+The User Details page is not pretty, but it shows the needed information. I couldn't find
+any decent "show just some text in a nice" components in Mantine.
 
 

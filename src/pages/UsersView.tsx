@@ -1,9 +1,9 @@
 import { Button, Card, Group, Image, Table, Title } from "@mantine/core";
-import { User } from "./user-filtering";
+import { User } from "./User";
 
 export function listView(users: User[]) {
-    const tableRows = users.map((user, index) =>
-        <Table.Tr key={index}>
+    const tableRows = users.map(user =>
+        <Table.Tr key={user.id}>
             <Table.Td>{user.name}</Table.Td>
             <Table.Td>{user.hair}</Table.Td>
             <Table.Td>{user.eyes}</Table.Td>
@@ -33,8 +33,8 @@ export function listView(users: User[]) {
 export function gridView(users: User[]) {
     return (
         <Group>
-            {users.map((user, index) => (
-                <Card radius={'md'} withBorder key={index} w={'220'}>
+            {users.map(user => (
+                <Card radius={'md'} withBorder key={user.id} w={'220'}>
                     <Card.Section>
                         <Image src={`/uploads/${user.avatar}`} alt={`Avatar for ${user.name}`} />
                     </Card.Section>

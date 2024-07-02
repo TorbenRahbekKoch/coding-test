@@ -17,7 +17,12 @@ import { useDisclosure } from '@mantine/hooks';
 // See: https://immerjs.github.io/immer/example-setstate
 import { useImmer } from "use-immer";
 
-import { EyeColor, Gender, Glasses, HairColor, User, UserFilter, buildFilter, defaultFilter } from './user-filtering';
+import { UserFilter, buildFilter, defaultFilter } from './user-filtering';
+import { Glasses } from "./User";
+import { Gender } from "./User";
+import { EyeColor } from "./User";
+import { HairColor } from "./User";
+import { User } from "./User";
 import { gridView, listView } from './UsersView';
 import { parsePageCount } from './parsePageCount';
 

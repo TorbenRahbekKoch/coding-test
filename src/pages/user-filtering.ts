@@ -1,17 +1,8 @@
-export type HairColor = 'black' | 'brown' | 'blonde' | 'red' | 'grey';
-export type EyeColor = 'brown' | 'blue' | 'green';
-export type Gender = 'female' | 'male';
-export type Glasses = 'all' | 'glasses' | 'no-glasses'
-
-export type User = {
-    id: string;
-    name: string;
-    avatar: string;
-    gender: Gender
-    hair: HairColor
-    eyes: EyeColor
-    glasses: boolean;
-};
+import { EyeColor } from "./User";
+import { Glasses } from "./User";
+import { Gender } from "./User";
+import { HairColor } from "./User";
+import { User } from "./User";
 
 // I prefer interface over type of the simple
 // reason that it is recommended by TypeScript itself.

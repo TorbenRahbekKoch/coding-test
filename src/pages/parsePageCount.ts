@@ -1,4 +1,5 @@
-// The json-server returns the page count in a header, we pick that out here
+// The json-server returns the page count in a header, we pick that out here - the header looks like:
+// 	<http://localhost:3000/users?_page=1&_per_page=3>; rel="first", <http://localhost:3000/users?_page=2&_per_page=3>; rel="next", <http://localhost:3000/users?_page=2&_per_page=3>; rel="last"
 export function parsePageCount(headers: Headers): number {
   const links = headers.get('link');
   if (links != null) {
@@ -12,5 +13,6 @@ export function parsePageCount(headers: Headers): number {
       }
     }
   }
+  // We default to one page, or the navigation bar dissapears
   return 1;
 }

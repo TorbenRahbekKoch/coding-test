@@ -34,6 +34,7 @@ export const defaultFilter: UserFilter = {
     glasses: 'all'
 }
 
+// I have left the frontend filter code in, just as a show case
 function nameMatches(name: string, nameFilter: string): boolean {
     const nameFilterLower = nameFilter.toLowerCase()
     return nameFilter.length == 0        
@@ -74,3 +75,45 @@ export function filterUsers(users: User[], filter: UserFilter): User[] {
         .filter(user => userMatches(user, filter))
 }
 
+// Here comes the query building for backend filtering
+function buildNameFilter(name: string) {
+    return (name.length > 0)
+        ? `name=${name}`
+        : ''
+}
+
+function buildEyeColorFilter(eyeColor?: EyeColor) {
+    return (eyeColor != null)
+        ? `eyes=${eyeColor}`
+        : ''
+}
+
+function buildHairColorFilter(hairColor?: HairColor) {
+    return (hairColor != null)
+        ? `hair=${hairColor}`
+        : ''
+}
+
+function buildGenderFilter(gender?: Gender) {
+    return (gender != null)
+        ? `gender=${gender}`
+        : ''
+}
+
+function buildGlassesFilter(glasses: Glasses) {
+    if (glasses != 'all') {
+        return (glasses == "glasses")
+            ? 'glasses=true'
+            : 'glasses=false'
+    }
+
+    return ''
+}
+
+export function buildFilter(filter: UserFilter): string {
+    return buildNameFilter(filter.name)
+        + buildEyeColorFilter(filter.eyes)
+        + buildHairColorFilter(filter.hair)
+        + buildGenderFilter(filter.gender)
+        + buildGlassesFilter(filter.glasses)
+}

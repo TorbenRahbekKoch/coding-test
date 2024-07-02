@@ -19,18 +19,19 @@ import { useDisclosure } from '@mantine/hooks';
 // See: https://immerjs.github.io/immer/example-setstate
 import { useImmer } from "use-immer";
 
-import { EyeColor, Gender, Glasses, HairColor, User, UserFilter, defaultFilter, filterUsers } from './user-filtering';
+import { EyeColor, Gender, Glasses, HairColor, User, UserFilter, buildFilter, defaultFilter, filterUsers } from './user-filtering';
 
 export function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [userFilter, setUserFilter] = useImmer<UserFilter>(defaultFilter)
   const [opened, { toggle }] = useDisclosure(false);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/users')
+  useEffect(() => {    
+    window.document.body.style.cursor ='wait'
+    fetch(`http://localhost:3000/users?${buildFilter(userFilter)}`)
       .then((response) => response.json())
       .then((data) => setUsers(data));
-  }, []);
+  }, [userFilter]);
 
   return (
     <>
@@ -82,7 +83,7 @@ export function UsersPage() {
       </Collapse>
 
       <Group>
-        {filterUsers(users, userFilter).map((user, index) => (
+        {users.map((user, index) => (
           <Card radius={'md'} withBorder key={index} w={'220'}>
             <Card.Section>
               <Image src={`/uploads/${user.avatar}`} alt={`Avatar for ${user.name}`} />

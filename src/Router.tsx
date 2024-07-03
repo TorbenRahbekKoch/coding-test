@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { HomePage } from './pages/Home.page';
-import { UsersPage } from './pages/Users.page';
-import { UserDetailsContainer } from './pages/UserDetails.container';
-import { UserEditContainer } from './pages/UserEdit.container';
+import { HomePage } from './Presentation/Home/Home.page';
+import { UsersPage } from './Presentation/Users/Users.page';
+import { UserDetailsContainer } from './Presentation/Users/UserDetails.container';
+import { UserEditContainer } from './Presentation/Users/UserEdit.container';
 
 const router = createBrowserRouter([
   {

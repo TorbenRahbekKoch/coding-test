@@ -48,3 +48,5 @@ I tried getting having 'src' as root path to work, but did not succeed. I have h
 in my own projects, as well. 
 
 I wanted to restructure the application somewhat, but I don't think it would be worth the time spent.
+
+I decided to do a bit of restructuring anyway :)

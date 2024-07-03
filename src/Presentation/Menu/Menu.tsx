@@ -1,6 +1,6 @@
 import { Button, Group, Image } from '@mantine/core';
 import { FC, ReactNode } from 'react';
-import FormpipeLogo from '../assets/formpipe-logo.svg';
+import FormpipeLogo from '../../assets/formpipe-logo.svg';
 
 const MenuButton: FC<{ href: string; children: ReactNode }> = ({ href, children }) => (
   <Button color={'grape'} component={'a'} variant="subtle" href={href}>

@@ -3,7 +3,7 @@ import { AppShell, Container, MantineProvider } from '@mantine/core';
 
 import { Router } from './Router';
 import { theme } from './theme';
-import { Menu } from './components/Menu';
+import { Menu } from './Presentation/Menu/Menu';
 
 export default function App() {
   return (
